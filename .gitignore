@@ -1,0 +1,15 @@
+# Virtual environment (rebuild it from requirements.txt)
+.venv/
+
+# Downloaded dataset and trained models (recreate with the scripts)
+data/
+models/
+
+# Python and Jupyter caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store

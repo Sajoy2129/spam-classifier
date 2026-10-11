@@ -53,15 +53,16 @@ spam-classifier/
 - [x] Commit
 
 ### Phase 2 — Explore the data (`notebooks/01_explore.ipynb`)
-- [ ] Read 10 ham and 10 spam messages by eye
-- [ ] Count each class and plot it — expect roughly 87% ham / 13% spam (this is called **class imbalance**)
-- [ ] Compare message length for spam vs ham (histogram)
-- [ ] List the most common words in each class
-- [ ] Check for duplicate messages and decide whether to drop them
-- [ ] Write 3–4 bullet-point findings at the bottom of the notebook
-- [ ] Commit
+- [x] Read 10 ham and 10 spam messages by eye
+- [x] Count each class and plot it — expect roughly 87% ham / 13% spam (this is called **class imbalance**)
+- [x] Compare message length for spam vs ham (histogram)
+- [x] List the most common words in each class
+- [x] Check for duplicate messages and decide whether to drop them — decision: drop (403 duplicate rows)
+- [x] Write 3–4 bullet-point findings at the bottom of the notebook
+- [x] Commit
 
 ### Phase 3 — Turn text into numbers
+- [ ] Drop the 403 duplicate messages before splitting (decided in Phase 2)
 - [ ] Write `split_data()` in `src/data.py`: 80% train / 20% test, **stratified** (both parts keep the same spam ratio), fixed `random_state` so results repeat
 - [ ] Try `CountVectorizer` on 3 toy sentences to see the word-count table it makes (bag of words)
 - [ ] Switch to `TfidfVectorizer` and see how the numbers change

@@ -46,11 +46,11 @@ spam-classifier/
 - [x] First commit: plan, `.gitignore`, `requirements.txt`
 
 ### Phase 1 — Get the data
-- [ ] Write `src/download_data.py` to download and unzip from `https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip` into `data/`
-- [ ] Write `load_data()` in `src/data.py`: read the `SMSSpamCollection` file (tab-separated, no header row) into a pandas DataFrame with columns `label` and `message`
-- [ ] Sanity check: 5,574 rows, only two labels (`ham`, `spam`), no empty messages
-- [ ] Test in `tests/test_data.py`: columns and labels are what we expect
-- [ ] Commit
+- [x] Write `src/download_data.py` to download and unzip from `https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip` into `data/`
+- [x] Write `load_data()` in `src/data.py`: read the `SMSSpamCollection` file (tab-separated, no header row) into a pandas DataFrame with columns `label` and `message`
+- [x] Sanity check: 5,574 rows, only two labels (`ham`, `spam`), no empty messages
+- [x] Test in `tests/test_data.py`: columns and labels are what we expect
+- [x] Commit
 
 ### Phase 2 — Explore the data (`notebooks/01_explore.ipynb`)
 - [ ] Read 10 ham and 10 spam messages by eye

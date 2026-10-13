@@ -78,14 +78,14 @@ spam-classifier/
 - [x] Commit
 
 ### Phase 5 — Evaluate properly (`src/evaluate.py`)
-- [ ] Score on the test set only — data the model never saw
-- [ ] Print the **confusion matrix** (table of right and wrong guesses per class)
-- [ ] Report **precision** (of messages flagged spam, how many really were), **recall** (of real spam, how much we caught) and **F1** (one number combining both)
-- [ ] Explain why accuracy alone misleads here, using the always-ham baseline
-- [ ] Run 5-fold **cross-validation** on the training set (train and score 5 times on different slices) to check the result is not a lucky split
-- [ ] Read the misclassified messages and look for patterns
-- [ ] Pick the final model, save it to `models/spam_pipeline.joblib`, and write the numbers and the reason in `README.md`
-- [ ] Commit
+- [x] Score on the test set only — data the model never saw
+- [x] Print the **confusion matrix** (table of right and wrong guesses per class)
+- [x] Report **precision** (of messages flagged spam, how many really were), **recall** (of real spam, how much we caught) and **F1** (one number combining both)
+- [x] Explain why accuracy alone misleads here, using the always-ham baseline
+- [x] Run 5-fold **cross-validation** on the training set (train and score 5 times on different slices) to check the result is not a lucky split
+- [x] Read the misclassified messages and look for patterns
+- [x] Pick the final model, save it to `models/spam_pipeline.joblib`, and write the numbers and the reason in `README.md`
+- [x] Commit
 
 ### Phase 6 — Test my own messages (`src/predict.py`)
 - [ ] Load the saved pipeline with joblib

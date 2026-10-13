@@ -62,20 +62,20 @@ spam-classifier/
 - [x] Commit
 
 ### Phase 3 — Turn text into numbers
-- [ ] Drop the 403 duplicate messages before splitting (decided in Phase 2)
-- [ ] Write `split_data()` in `src/data.py`: 80% train / 20% test, **stratified** (both parts keep the same spam ratio), fixed `random_state` so results repeat
-- [ ] Try `CountVectorizer` on 3 toy sentences to see the word-count table it makes (bag of words)
-- [ ] Switch to `TfidfVectorizer` and see how the numbers change
-- [ ] Learn the key rule: fit the vectorizer on training data only — fitting on test data is **data leakage** (the model peeks at the exam)
-- [ ] Commit
+- [x] Drop the 403 duplicate messages before splitting (decided in Phase 2)
+- [x] Write `split_data()` in `src/data.py`: 80% train / 20% test, **stratified** (both parts keep the same spam ratio), fixed `random_state` so results repeat
+- [x] Try `CountVectorizer` on 3 toy sentences to see the word-count table it makes (bag of words)
+- [x] Switch to `TfidfVectorizer` and see how the numbers change
+- [x] Learn the key rule: fit the vectorizer on training data only — fitting on test data is **data leakage** (the model peeks at the exam)
+- [x] Commit
 
 ### Phase 4 — Train a model
-- [ ] Write `build_pipeline()` in `src/model.py`: `TfidfVectorizer` → `MultinomialNB` in one scikit-learn `Pipeline`
-- [ ] Write `src/train.py`: load, split, fit, save the pipeline to `models/spam_pipeline.joblib`
-- [ ] Add a baseline for comparison: a "model" that always says ham (about 87% accurate while catching zero spam)
-- [ ] Train Logistic Regression as a second model to compare
-- [ ] Test in `tests/test_model.py`: pipeline fits on a tiny made-up dataset and predicts a valid label
-- [ ] Commit
+- [x] Write `build_pipeline()` in `src/model.py`: `TfidfVectorizer` → `MultinomialNB` in one scikit-learn `Pipeline`
+- [x] Write `src/train.py`: load, drop duplicates, split, fit each model, print the comparison
+- [x] Add a baseline for comparison: a "model" that always says ham (about 87% accurate while catching zero spam)
+- [x] Train Logistic Regression as a second model to compare
+- [x] Test in `tests/test_model.py`: pipeline fits on a tiny made-up dataset and predicts a valid label
+- [x] Commit
 
 ### Phase 5 — Evaluate properly (`src/evaluate.py`)
 - [ ] Score on the test set only — data the model never saw
@@ -84,7 +84,7 @@ spam-classifier/
 - [ ] Explain why accuracy alone misleads here, using the always-ham baseline
 - [ ] Run 5-fold **cross-validation** on the training set (train and score 5 times on different slices) to check the result is not a lucky split
 - [ ] Read the misclassified messages and look for patterns
-- [ ] Pick the final model; write the numbers and the reason in `README.md`
+- [ ] Pick the final model, save it to `models/spam_pipeline.joblib`, and write the numbers and the reason in `README.md`
 - [ ] Commit
 
 ### Phase 6 — Test my own messages (`src/predict.py`)

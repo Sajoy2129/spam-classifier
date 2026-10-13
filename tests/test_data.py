@@ -1,8 +1,9 @@
 """Tests for loading the dataset."""
 
+import pandas as pd
 import pytest
 
-from data import load_data
+from data import load_data, remove_duplicates, split_data
 from download_data import DATA_FILE
 
 
@@ -50,6 +51,38 @@ def test_load_data_keeps_quote_characters(tmp_path):
 def test_load_data_missing_file_raises(tmp_path):
     with pytest.raises(FileNotFoundError, match="download_data.py"):
         load_data(tmp_path / "does_not_exist.tsv")
+
+
+def test_remove_duplicates_keeps_one_copy():
+    messages = pd.DataFrame(
+        {
+            "label": ["ham", "ham", "spam"],
+            "message": ["Ok", "Ok", "Free prize"],
+        }
+    )
+
+    unique = remove_duplicates(messages)
+
+    assert list(unique["message"]) == ["Ok", "Free prize"]
+
+
+def test_split_data_sizes_and_spam_ratio():
+    # 100 messages, 20 of them spam.
+    messages = pd.DataFrame(
+        {
+            "label": ["spam"] * 20 + ["ham"] * 80,
+            "message": [f"message number {i}" for i in range(100)],
+        }
+    )
+
+    train_texts, test_texts, train_labels, test_labels = split_data(messages)
+
+    assert len(train_texts) == 80
+    assert len(test_texts) == 20
+    assert (train_labels == "spam").sum() == 16
+    assert (test_labels == "spam").sum() == 4
+    # No message is in both parts.
+    assert set(train_texts).isdisjoint(set(test_texts))
 
 
 @pytest.mark.skipif(

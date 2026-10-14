@@ -1,7 +1,92 @@
 # SMS Spam Classifier
 
-Reads an SMS message and says **spam** or **ham** (a normal message).
-Trained on the UCI SMS Spam Collection dataset.
+Reads an SMS message and says **spam** or **ham** (a normal message),
+with how confident it is:
+
+```
+$ python src/predict.py "WINNER!! Claim your free prize now, text WIN to 80086"
+SPAM (95.3% confident)
+```
+
+## How it works
+
+The model is trained on the
+[UCI SMS Spam Collection](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
+dataset: 5,574 labelled messages, about 13% spam. After dropping 403
+duplicate messages, it splits the rest 80% for training and 20% for
+testing.
+
+The model is a scikit-learn `Pipeline` with two steps:
+
+1. **TF-IDF** turns each message into numbers, one score per word for
+   how important that word is to the message.
+2. **Logistic Regression** turns those numbers into ham or spam.
+
+Keeping both steps in one pipeline means training and prediction always
+run the same steps.
+
+## Project layout
+
+```
+src/
+  download_data.py   fetch the dataset into data/
+  data.py            load, de-duplicate and split the data
+  model.py           build the TF-IDF + classifier pipeline
+  train.py           compare models, save the final one to models/
+  evaluate.py        confusion matrices, precision/recall/F1, mistakes
+  predict.py         classify your own messages
+tests/               pytest tests for each module
+notebooks/           data exploration
+```
+
+## Setup
+
+You need Python 3.13. Run these commands from the project folder:
+
+```
+python3 -m venv .venv            # create a virtual environment
+source .venv/bin/activate        # turn it on (macOS/Linux)
+pip install -r requirements.txt  # install the libraries
+python src/download_data.py      # download the dataset into data/
+```
+
+## Train
+
+```
+python src/train.py
+```
+
+This prints a comparison of the models and saves the final one to
+`models/spam_pipeline.joblib`.
+
+To see the detailed scores, the 5-fold cross-validation and every
+misclassified test message, run:
+
+```
+python src/evaluate.py
+```
+
+## Predict
+
+Classify one message:
+
+```
+python src/predict.py "Are we still on for lunch tomorrow?"
+HAM (94.7% confident)
+```
+
+Run it without a message to type messages one after another. Type `quit`
+to stop:
+
+```
+python src/predict.py
+```
+
+## Run the tests
+
+```
+pytest
+```
 
 ## Results
 
@@ -68,12 +153,3 @@ Takeaways: one spam word is not enough, short messages carry little
 evidence, and the low confidence (62.6%) was a sign the model was unsure.
 Lowering the spam threshold or adding word pairs such as `free stuff`
 could catch messages like this.
-
-## How to reproduce
-
-```
-python src/download_data.py   # fetch the dataset into data/
-python src/train.py           # compare models, save models/spam_pipeline.joblib
-python src/evaluate.py        # confusion matrices, precision/recall/F1, mistakes
-pytest                        # run the tests
-```

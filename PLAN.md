@@ -92,8 +92,8 @@ spam-classifier/
 - [x] One-shot mode: `python src/predict.py "You won a free prize!"` prints the label and spam probability
 - [x] Interactive mode: no argument starts a loop that keeps asking for messages until you type `quit`
 - [x] Friendly error if the model file does not exist yet ("run train.py first")
-- [ ] Try 10 of your own messages, including tricky ones, and note where it fails
-- [ ] Commit
+- [x] Try 10 of your own messages, including tricky ones, and note where it fails
+- [x] Commit
 
 ### Phase 7 — Wrap up
 - [ ] Finish `README.md`: what it does, how to set up, how to train, how to predict, results

@@ -46,6 +46,29 @@ through, so moving the decision threshold is a planned improvement.
 - A few messages labelled spam in the dataset read like ordinary texts,
   so some mistakes come from the labels rather than the model.
 
+## Testing my own messages
+
+| Message                                                 | Model says | Right? |
+|---------------------------------------------------------|------------|--------|
+| WINNER!! Claim your free prize now, text WIN to 80086   | SPAM 95.3% | Yes    |
+| Hey how are you                                         | HAM 98.2%  | Yes    |
+| Its free, you may please come                           | HAM 85.8%  | Yes    |
+| free stuffs available for your                          | HAM 62.6%  | No     |
+
+Why `free stuffs available for your` slipped through:
+
+- Every message starts at a score of -2.53, leaning ham, because 87% of
+  the training messages were ham.
+- `free` (+3.26), `your` (+2.35) and `for` (+1.71) all push toward spam,
+  but in a short message they add up to only +2.01. The final score of
+  -0.52 is still below 0, so the answer is ham.
+- `stuffs` never appears in the training data, so it counts for nothing.
+
+Takeaways: one spam word is not enough, short messages carry little
+evidence, and the low confidence (62.6%) was a sign the model was unsure.
+Lowering the spam threshold or adding word pairs such as `free stuff`
+could catch messages like this.
+
 ## How to reproduce
 
 ```

@@ -48,6 +48,15 @@ def test_load_data_keeps_quote_characters(tmp_path):
     assert messages.loc[0, "message"] == 'She said "hello and left'
 
 
+def test_load_data_keeps_na_text_as_a_message(tmp_path):
+    # "NA" is a real message, not a missing value.
+    path = write_fake_dataset(tmp_path, ["ham\tNA", "spam\tFree entry"])
+
+    messages = load_data(path)
+
+    assert messages.loc[0, "message"] == "NA"
+    assert messages["message"].notna().all()
+
 def test_load_data_missing_file_raises(tmp_path):
     with pytest.raises(FileNotFoundError, match="download_data.py"):
         load_data(tmp_path / "does_not_exist.tsv")

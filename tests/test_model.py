@@ -32,3 +32,13 @@ def test_pipeline_accepts_another_classifier():
     predictions = pipeline.predict(["Claim your free prize"])
 
     assert predictions[0] in {"ham", "spam"}
+
+
+def test_pipelines_do_not_share_a_classifier():
+    classifier = LogisticRegression()
+
+    first = build_pipeline(classifier)
+    second = build_pipeline(classifier)
+
+    assert first.named_steps["classifier"] is not classifier
+    assert first.named_steps["classifier"] is not second.named_steps["classifier"]

@@ -97,6 +97,10 @@ def evaluate():
     messages = remove_duplicates(load_data())
     train_texts, test_texts, train_labels, test_labels = split_data(messages)
 
+    # Fail now, not after minutes of training, if the name has a typo.
+    if FINAL_MODEL not in MODELS:
+        raise ValueError(f"FINAL_MODEL {FINAL_MODEL!r} is not in MODELS")
+
     print("=== Test set scores ===")
     print()
     for name, classifier in MODELS.items():

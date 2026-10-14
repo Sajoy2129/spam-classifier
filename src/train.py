@@ -61,7 +61,7 @@ def train_final_model(path=MODEL_FILE):
     pipeline.fit(train_texts, train_labels)
 
     path = Path(path)
-    path.parent.mkdir(exist_ok=True)
+    path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(pipeline, path)  # write the fitted pipeline to one file
     print(f"Saved {FINAL_MODEL} to: {path}")
     return pipeline

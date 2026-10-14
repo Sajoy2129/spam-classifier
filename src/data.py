@@ -27,6 +27,9 @@ def load_data(path=DATA_FILE):
         header=None,  # the file has no header row...
         names=["label", "message"],  # ...so we name the columns ourselves
         quoting=csv.QUOTE_NONE,  # treat " as normal text, not a field wrapper
+        # By default pandas turns text like "NA" or an empty field into a
+        # missing value (NaN), which the vectorizer cannot read. Keep it text.
+        keep_default_na=False,
     )
 
 

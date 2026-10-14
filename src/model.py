@@ -1,5 +1,6 @@
 """Build the text-to-prediction pipeline."""
 
+from sklearn.base import clone
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
@@ -17,6 +18,8 @@ def build_pipeline(classifier=None):
     return Pipeline(
         [
             ("tfidf", TfidfVectorizer()),  # text -> numbers
-            ("classifier", classifier),  # numbers -> ham or spam
+            # clone() makes a fresh, untrained copy, so two pipelines built
+            # from the same classifier never share (and overwrite) its training.
+            ("classifier", clone(classifier)),  # numbers -> ham or spam
         ]
     )

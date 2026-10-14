@@ -96,9 +96,9 @@ spam-classifier/
 - [x] Commit
 
 ### Phase 7 — Wrap up
-- [ ] Finish `README.md`: what it does, how to set up, how to train, how to predict, results
-- [ ] Run `/code-review` on the project and fix what it finds
-- [ ] Final commit
+- [x] Finish `README.md`: what it does, how to set up, how to train, how to predict, results
+- [x] Run `/code-review` on the project and fix what it finds
+- [x] Final commit
 
 ### Stretch ideas (optional, later)
 - [ ] Tune settings with `GridSearchCV` (word pairs via `ngram_range`, `min_df`, NB `alpha`)

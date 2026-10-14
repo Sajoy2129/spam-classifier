@@ -88,10 +88,10 @@ spam-classifier/
 - [x] Commit
 
 ### Phase 6 — Test my own messages (`src/predict.py`)
-- [ ] Load the saved pipeline with joblib
-- [ ] One-shot mode: `python src/predict.py "You won a free prize!"` prints the label and spam probability
-- [ ] Interactive mode: no argument starts a loop that keeps asking for messages until you type `quit`
-- [ ] Friendly error if the model file does not exist yet ("run train.py first")
+- [x] Load the saved pipeline with joblib
+- [x] One-shot mode: `python src/predict.py "You won a free prize!"` prints the label and spam probability
+- [x] Interactive mode: no argument starts a loop that keeps asking for messages until you type `quit`
+- [x] Friendly error if the model file does not exist yet ("run train.py first")
 - [ ] Try 10 of your own messages, including tricky ones, and note where it fails
 - [ ] Commit
 
